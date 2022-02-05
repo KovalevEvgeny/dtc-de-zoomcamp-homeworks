@@ -40,6 +40,25 @@ _What was the most popular destination for passengers picked up in central park 
 
 **Solution:**
 
+```
+SELECT
+	zdo."Zone" AS "do_loc_zone",
+	COUNT(1)
+FROM
+	yellow_taxi_data t
+	LEFT JOIN zones zpu
+		ON t."PULocationID" = zpu."LocationID"
+	LEFT JOIN zones zdo
+		ON t."DOLocationID" = zdo."LocationID"
+WHERE
+	CAST(tpep_pickup_datetime AS date) = '2021-01-14'
+	AND zpu."Zone" = 'Central Park'
+GROUP BY
+	"do_loc_zone"
+ORDER BY
+	"count" DESC
+```
+
 # Question 6
 
 _What's the pickup-dropoff pair with the largest average price for a ride (calculated based on total_amount)? Enter two zone names separated by a slash._
