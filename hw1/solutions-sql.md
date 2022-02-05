@@ -64,3 +64,19 @@ ORDER BY
 _What's the pickup-dropoff pair with the largest average price for a ride (calculated based on total_amount)? Enter two zone names separated by a slash._
 
 **Solution:**
+
+```
+SELECT
+	CONCAT(COALESCE(zpu."Zone", 'Unknown'), ' / ', COALESCE(zdo."Zone", 'Unknown')) AS "pu_do_zones",
+	AVG(total_amount)
+FROM
+	yellow_taxi_data t
+	LEFT JOIN zones zpu
+		ON t."PULocationID" = zpu."LocationID"
+	LEFT JOIN zones zdo
+		ON t."DOLocationID" = zdo."LocationID"
+GROUP BY
+	"pu_do_zones"
+ORDER BY
+	AVG DESC
+```
