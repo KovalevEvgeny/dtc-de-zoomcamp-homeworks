@@ -12,7 +12,8 @@ FROM
 	yellow_taxi_data
 WHERE
 	CAST(tpep_pickup_datetime AS date) = '2021-01-15'
-GROUP BY "day"
+GROUP BY
+	"day"
 ```
 
 # Question 4
@@ -20,6 +21,18 @@ GROUP BY "day"
 _Find the largest tip for each day. On which day it was the largest tip in January? Use the pick up time for your calculations. (note: it's not a typo, it's "tip", not "trip")_
 
 **Solution:**
+
+```
+SELECT
+	CAST(tpep_pickup_datetime AS date) AS "day",
+	MAX(tip_amount) AS "max_tip"
+FROM
+	yellow_taxi_data
+GROUP BY
+	"day"
+ORDER BY
+	"max_tip" DESC
+```
 
 # Question 5
 
