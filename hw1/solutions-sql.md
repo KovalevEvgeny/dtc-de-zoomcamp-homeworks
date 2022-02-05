@@ -4,6 +4,17 @@ _How many taxi trips were there on January 15? Consider only trips that started 
 
 **Solution:**
 
+```
+SELECT
+	CAST(tpep_pickup_datetime AS date) AS "day",
+	COUNT(1)
+FROM
+	yellow_taxi_data
+WHERE
+	CAST(tpep_pickup_datetime AS date) = '2021-01-15'
+GROUP BY "day"
+```
+
 # Question 4
 
 _Find the largest tip for each day. On which day it was the largest tip in January? Use the pick up time for your calculations. (note: it's not a typo, it's "tip", not "trip")_
